@@ -1,0 +1,25 @@
+# Specifies the API version used to create this object
+apiVersion: v1
+
+# Declares the type of Kubernetes object — here it's a Pod
+kind: Pod
+
+# Metadata provides information about the Pod, such as its name and labels
+metadata:
+  name: nginx-pod           # Name of the pod
+  labels:                   # Labels are key-value pairs used for organizing and selecting resources
+    app: nginx              # A more conventional label (useful for service selectors)
+
+# The specification of the Pod — defines how the pod and its containers should behave
+spec:
+  containers:               # List of containers to run in the pod (a pod can run multiple containers)
+  - name: nginx-container   # Name of the container (can be different from the pod name)
+    image: nginx            # Docker image to use for the container (will be pulled from Docker Hub by default)
+    
+    resources:              # Resource requests and limits for the container
+      limits:
+        memory: "128Mi"     # Maximum amount of memory this container can use
+        cpu: "500m"         # Maximum CPU this container can use (500 millicores = 0.5 core)
+    
+    ports:
+    - containerPort: 80     # Exposes port 80 on the container (used for HTTP traffic by default in nginx)
